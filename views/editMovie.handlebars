@@ -1,0 +1,48 @@
+<div class="container">
+    <h1 class="mt-0">Edit {{movie.title}}</h1>
+    <p>Update your movie status here.</p>
+    <div class="row">
+        <div class="col-md-6 col-12 mx-auto">
+            <div class="card">
+                {{#if movie.poster}}
+                    <img src="{{movie.poster}}" class="card-img-top" alt="{{movie.title}}">
+                {{else}}
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 300px; background-color: #f0f0f0; color: #555; font-weight: bold;">
+                        Image Not Available
+                    </div>
+                {{/if}}
+                <div class="card-body">
+                    <h5 class="card-title">{{movie.title}} ({{movie.year}})</h5>
+                    <p class="card-text">IMDB ID: {{movie.imdbId}}</p>
+                    <form action="/api/watchlist/{{movie._id}}/edit" method="POST">
+                        <label for="status">Status:</label>
+                        <input type="hidden" id="currentStatus" value="{{movie.status}}">
+                        <select name="status" id="status" class="form-select mb-3">
+                            <option value="Want to Watch">Want to Watch</option>
+                            <option value="Currently Watching">Currently Watching</option>
+                            <option value="Finished Watching">Finished Watching</option>
+                            <option value="Pretend You'll Watch Later">Pretend You'll Watch Later</option>
+                        </select>
+                        <div class="d-flex flex-column gap-2 align-items-center mt-3">
+                            <button type="submit" class="btn btn-primary watchlist-btn">Save changes</button>
+                            <p id="save-confirm" class="text-success mt-2" style="display: none;">Changes saved!</p>
+                            <a href="/watchlist" class="btn btn-secondary watchlist-btn">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const statusSelect = document.getElementById("status");
+    const currentStatus = document.getElementById("currentStatus").value;
+    statusSelect.value = currentStatus;
+    const form = document.querySelector("form");
+    const saveConfirm = document.getElementById("save-confirm");
+
+    form.addEventListener("submit", (e) => {
+        saveConfirm.style.display = "block";
+    });
+</script>

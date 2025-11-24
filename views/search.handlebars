@@ -1,0 +1,41 @@
+<div class="container">
+    <h1 class="mt-0">Search for Movies</h1>
+
+    <form action="/search" method="POST">
+        <div class="mb-3">
+            <label for="movie">Enter a movie title:</label>
+            <input type="text" id="movie" name="movie" class="form-control" placeholder="e.g., Braveheart" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {{#if movies}}
+        <h2>Results:</h2>
+        <div class="row">
+            {{#each movies}}
+                <div class="col-md-4 card-column">
+                    <div class="card mb-3 equal-card">
+                        {{#if poster}}
+                            <img src="{{poster}}" class="card-img-top" alt="{{title}}">
+                        {{else}}
+                            <div class="card-img-top fallback d-flex align-items-center justify-content-center" style="background-color: #f0f0f0; color: #555; font-weight: bold;">
+                                Image Not Available
+                            </div>
+                        {{/if}}
+                        <div class="card-body d-flex flex-column justify-content-between text-center">
+                            <h5 class="card-title">{{title}} ({{year}})</h5>
+                            <p class="card-text">IMDB ID: {{imdbId}}</p>
+                            <form action="/api/watchlist" method="POST" class="mt-auto">
+                                <input type="hidden" name="title" value="{{title}}">
+                                <input type="hidden" name="year" value="{{year}}">
+                                <input type="hidden" name="imdbId" value="{{imdbId}}">
+                                <input type="hidden" name="poster" value="{{poster}}">
+                                <button type="submit" class="btn btn-success">Add to Watchlist</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>
