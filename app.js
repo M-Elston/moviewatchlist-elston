@@ -4,7 +4,7 @@ const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
-
+const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
