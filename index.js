@@ -1,6 +1,11 @@
 const app = require("./app");
 const PORT = process.env.PORT || 3000;
 
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});
+
+/* Testing
 app.listen(PORT, function () {
   console.log("\n");
   console.log(
@@ -8,3 +13,4 @@ app.listen(PORT, function () {
     "Server listening on http://localhost:" + PORT
   );
 });
+*/

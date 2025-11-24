@@ -7,7 +7,9 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 const app = express();
+/* Testing
 const PORT = process.env.PORT || 3000;
+*/
 
 async function startServer() {
   await mongoose.connect(process.env.MONGODB_URI);
@@ -55,9 +57,11 @@ const htmlRoutes = require("./routes/htmlRoutes");
 app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);
 
+/* Testing
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
+*/
 
 }
 
